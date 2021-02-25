@@ -1,41 +1,25 @@
-package ImprovedAgent;
+//package ImprovedAgent;
 
 import javafx.scene.Group;
 import javafx.scene.transform.Rotate;
 
 public class TruckAgent extends Group implements Constants {
 
-
     private boolean built;
     private boolean passable;
-    private boolean movable;
-    private double width;
-    private double height;
-    private int direction;
+    private boolean movable; 
+    private int direction;  
+    private Location location;
 
     public TruckAgent() {
 
         built = false;
         movable = false;
-        width = 0;
-        height = 0;
         direction = FACING_WEST;
         passable = true;
+        location = new Location();
     }
-
-    public int getDirection() {return direction;}
-    public void setDirection(int direction) {this.direction = direction;}
-
-    public void setPassable(boolean passable) {
-
-        this.passable = passable;
-    }
-
-    public boolean getPassable() {
-
-        return passable;
-    }
-
+    
     public void setBuilt(boolean built) {
 
         this.built = built;
@@ -45,7 +29,17 @@ public class TruckAgent extends Group implements Constants {
 
         return built;
     }
+    
+    public void setPassable(boolean passable) {
 
+        this.passable = passable;
+    }
+
+    public boolean getPassable() {
+
+        return passable;
+    }
+    
     public void setMovable(boolean movable) {
 
         this.movable = movable;
@@ -54,6 +48,26 @@ public class TruckAgent extends Group implements Constants {
     public boolean getMovable() {
 
         return movable;
+    }
+
+    public void setDirection(int direction) {
+    	
+    	this.direction = direction;
+    }
+    
+    public int getDirection() {
+    	
+    	return direction;
+    }
+    
+    public void setLocation(Location location) {
+    	
+    	this.location = location;
+    }
+    
+    public Location setLocation() {
+    	
+    	return location;
     }
 
     public void turnRight() {
@@ -101,4 +115,5 @@ public class TruckAgent extends Group implements Constants {
 
         return position;
     }
+    
 }
