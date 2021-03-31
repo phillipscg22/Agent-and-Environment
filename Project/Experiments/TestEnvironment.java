@@ -17,14 +17,14 @@ public class TestEnvironment extends Application {
     protected double height = 750;
     protected boolean multiAgent = false;
     protected boolean deterministic = true;
-    protected int gridSize = 5;
+    protected int gridSize = 15;
     protected int maxStep = -1;
     protected long maxTime = -1;
     protected String searchType = null;
 
     protected Stage primaryStage = new Stage();
 
-    protected int goalCell = 1;
+    protected int goalCell = 3;
     protected int numOfAgents = 1;
     protected int numOfNonPassableCells = 5;
 

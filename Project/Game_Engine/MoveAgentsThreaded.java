@@ -1,5 +1,6 @@
 package Project.Game_Engine;
 
+import Project.Infrastructure.SuccessorFunction;
 import javafx.application.Platform;
 
 //In charge of moving agents within environment
@@ -43,10 +44,10 @@ public class MoveAgentsThreaded implements Action, Percepts {
                     int oldX = truck.getLocation().getX();
                     int oldY = truck.getLocation().getY();
 
-                    String percept = Action.goForward(environment, truck, true);
+                    boolean percept = SuccessorFunction.goForward(environment, truck);
                     System.out.println(percept);
 
-                    if (percept.equals(MOVED)) {
+                    if (percept) {
                         //Test to make sure same UUID is being moved (Yes it works)
                         System.out.println(truck.toString());
                         cells[truck.getLocation().getX()][truck.getLocation().getY()].setVisited(true);

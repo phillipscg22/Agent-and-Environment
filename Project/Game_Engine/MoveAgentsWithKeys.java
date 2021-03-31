@@ -1,5 +1,6 @@
 package Project.Game_Engine;
 
+import Project.Infrastructure.SuccessorFunction;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
@@ -55,10 +56,9 @@ public class MoveAgentsWithKeys implements EventHandler<KeyEvent>, Action, Perce
                 int oldX = agents[truckCounter].getLocation().getX();
                 int oldY = agents[truckCounter].getLocation().getY();
 
-                String percept = Action.goForward(environment, agents[truckCounter], true);
-                System.out.println(percept);
+                boolean percept = SuccessorFunction.goForward(environment, agents[truckCounter]);
 
-                if(percept.equals(MOVED)) {
+                if(percept) {
                             //Test to make sure same UUID is being moved (Yes it works)
                             //System.out.println(agents[truckCounter].toString());
                     cells[agents[truckCounter].getLocation().getX()][agents[truckCounter].getLocation().getY()].setVisited(true);
