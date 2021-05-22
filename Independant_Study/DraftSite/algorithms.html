@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ALP4AI - Algorithms Used</title>
+    <link rel="stylesheet" href="draft.css">
+</head>
+<body>
+<header class="top-header">ALP4AI: Algorithms</header>
+<header class="selection-bar">
+    <div class="dropdown">
+        <button class="home-button" onClick="location.href='draft.html'">Home</button>
+    </div>
+    <div class="dropdown">
+        <button class="algorithms" onClick="location.href='algorithms.html'">Algorithms Used</button>
+    </div>
+    <div class="dropdown">
+        <button class="paper" onClick="location.href='full-paper.html'">Research Paper</button>
+    </div>
+    <div class="dropdown">
+        <button class="drop-button">About the Team</button>
+        <div class="dropdown-content">
+            <a href="lasisi.html">Dr. Ramoni Lasisi</a>
+            <a href="dupont.html">Cadet Dupont</a>
+            <a href="phillips.html">Cadet Connor Phillips</a>
+        </div>
+    </div>
+</header>
+<br><br>
+<p class="algorithms-page"><b>Algorithm 1: </b>State space search transition model</p>
+<p class="algorithms-page"><b>Input: </b>A node, <i>node, </i>that corresponds to a state</p>
+<p class="algorithms-page"><b>Output: </b>A list of successor nodes to <i>node</i></p><br>
+<pre class="algorithms-content">
+    <b>procedure</b> <i>expand(node)</i>
+        <i>successors ← ∅</i>
+        <b>if </b><i>node.microState</i> <b>then</b>
+            <b>return </b><i>expandMicroState(node, successors)</i>
+        <b>else</b>
+            <b>return</b> <i>expandMacroState(node, successors)</i>
+    <b>end procedure</b>
+
+    <b>procedure</b> <i>expandMicroState(node, successors)</i>
+        make new nodes, <i>node1, node2, node3, </i> from <i>node</i>
+         <i>node1.turnRight
+         node2.turnLeft
+         node1.pathCost ← node.pathCost + 1
+         node2.pathCost ← node.pathCost + 1
+         successors ← successors ∪ {node1, node2}</i>
+        <b>if</b> <i>node.goForward </i> is a valid action <b>then</b>
+            <i>node3.goForward
+            node3.pathCost ← node.pathCost + 1
+            successors ← successors ∪ {node3}</i>
+        <b>return</b> <i>successors</i>
+    <b>end procedure</b>
+
+    <b>procedure</b> <i>expandMacroState(node, successors)</i>
+        make <i>node1, node2, node3, node4</i> from <i>node</i>
+        <b>if</b> <i>node.goLeft</i> is a valid action <b>then</b>
+            <i>node1.goLeft</i>
+            <i>node1.pathCost ← node.pathCost + 1
+            successors ← successors ∪ {node1}</i>
+        <b>if</b> <i>node.goRight</i> is a valid action <b>then</b>
+            <i>node2.goRight
+            node2.pathCost ← node.pathCost + 1
+            successors ← successors ∪ {node2}</i>
+        <b>if</b> <i>node.goTop</i> is a valid action <b>then</b>
+            <i>node3.goTop
+            node3.pathCost ← node.pathCost + 1
+            successors ← successors ∪ {node3}</i>
+        <b>if</b> <i>node.goBottom</i> is a valid action <b>then</b>
+            <i>node4.goBottom
+            node4.pathCost ← node.pathCost + 1
+            successors ← successors ∪ {node4}</i>
+        <b>return</b> <i>successors</i>
+    <b>end procedure</b>
+</pre><br><hr><br>
+
+<p class="algorithms-page"><b>Algorithm 2: </b>Local search transition model without heuristic</p>
+<p class="algorithms-page"><b>Input: </b>An agent <i>a</i> and current state <i>s</i></p>
+<p class="algorithms-page"><b>Output: </b>A successor state s′</p><br>
+<pre class="algorithms-content">
+    <b>procedure</b> <i>successorState(a,s)
+        successors ← ∅</i>
+        <b>foreach</b> state s′ ∈ <i>succ(s)</i> <b>do</b>
+            <b>if</b> s′ has not been visited <b>then</b>
+                <i>successors ← successors ∪ {s′}</i>
+        <b>if</b> <i>successors s</i> is empty <b>then</b>
+            randomly select an s′ from <i>succ</i>(s)
+        <b>else</b>
+            randomly select an s′ from <i>successors</i>
+        <b>return</b> s′
+    <b>end procedure</b>
+</pre><br><hr><br>
+
+<p class="algorithms-page"><b>Algorithm 3: </b>Local search transition model with heuristic</p>
+<p class="algorithms-page"><b>Input: </b>An agent a and current state s</p>
+<p class="algorithms-page"><b>Output: </b>A successor state s′</p><br>
+<pre class="algorithms-content">
+    <b>procedure</b> <i>successorState(a,s)
+        successors ← ∅</i>
+        <b>foreach</b> state s′ ∈ <i>succ(s)</i> <b>do</b>
+            <b>if</b> s′ has not been visited <b>then</b>
+                <i>successors ← successors ∪ {s′}</i>
+        <b>if</b> <i>SuccStates</i> is empty <b>then</b>
+            randomly select an s′ from <i>succ</i>(s)
+        <b>else</b>
+            s′ ← min(s∈successors) distance(est)(s, goal)
+        <b>return</b> s′
+    <b>end procedure</b>
+</pre><br><br><br>
+</body>
+</html>

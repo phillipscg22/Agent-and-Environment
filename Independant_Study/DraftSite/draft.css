@@ -1,0 +1,171 @@
+body {
+    background-color: lightslategray;
+}
+
+.top-header {
+    text-align: center;
+    font-size: 36px;
+    padding-bottom: 25px;
+    padding-top: 25px;
+}
+
+.not-bold {
+    font-weight: normal;
+}
+
+.selection-bar {
+    text-align: center;
+}
+
+.home-button {
+    cursor: pointer;
+    background-color: darkgray;
+    color: black;
+    padding: 16px;
+    font-size: 24px;
+    border: none;
+}
+
+.home-button:hover {
+    background-color: dimgray;
+    color: black;
+    padding: 16px;
+    font-size: 24px;
+    border: none;
+}
+
+.paper {
+    cursor: pointer;
+    background-color: darkgray;
+    color: black;
+    padding: 16px;
+    font-size: 24px;
+    border: none;
+}
+
+.paper:hover {
+    background-color: dimgray;
+    color: black;
+    padding: 16px;
+    font-size: 24px;
+    border: none;
+}
+
+.algorithms {
+    cursor: pointer;
+    background-color: darkgray;
+    color: black;
+    padding: 16px;
+    font-size: 24px;
+    border: none;
+}
+
+.algorithms:hover {
+    background-color: dimgray;
+    color: black;
+    padding: 16px;
+    font-size: 24px;
+    border: none;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+    font-size: 24px;
+}
+
+.drop-button {
+    background-color: darkgray;
+    color: black;
+    padding: 16px;
+    font-size: 24px;
+    border: none;
+}
+
+.drop-button:hover {
+    background-color: dimgray;
+    color: black;
+    padding: 16px;
+    font-size: 24px;
+    border: none;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: darkgray;
+    font-size: 24px;
+    min-width: 300px;
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {
+    background-color: dimgray;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+h1 {
+    text-align: center;
+}
+
+.abstract {
+    text-indent: 40px;
+    text-align: justify;
+    font-size: large;
+    min-width: 100%;
+}
+
+h2 {
+    text-align: center;
+}
+
+.description {
+    text-indent: 40px;
+    text-align: justify;
+    font-size: large;
+    min-width: 100%;
+}
+
+.paper-content {
+    border: none;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 50px;
+    padding-right: 25%;
+    height: 750px;
+}
+
+.lasisi-paragraph {
+    text-align: center;
+}
+
+.lasisi-page {
+    font-size: larger;
+}
+
+.algorithms-page {
+    padding-left: 25%;
+    padding-right: 25%;
+    margin: 0;
+    text-align: justify;
+}
+
+.algorithms-content {
+    padding-left: 25%;
+    padding-right: 25%;
+    text-align: justify;
+}
+
+.divider {
+
+    align-content: center;
+}
