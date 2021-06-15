@@ -15,27 +15,25 @@ public class TestEnvironment extends Application implements Constants {
     protected double height = 750;
 
     protected long maxTime = -1;   //Use -1 for unlimited time
-    protected int maxStep = 75;
+    protected int maxStep = 150;
 
     protected boolean deterministic = true;
 
-    protected int gridSize = 50;
+    protected int gridSize = 5;
 
-    protected int numOfGoals = 2;
-    protected int numOfAgents = 2;
+    protected int numOfGoals = 1;
+    protected int numOfAgents = 1;
     protected int numOfNonPassableCells = gridSize * gridSize / 5;
 
-    protected String searchType = BREADTH_FIRST_SEARCH;
+    protected String searchType = GREEDY_BEST_FIRST_SEARCH;
 
-    private int seed = 15;
+    private int seed = 0;
 
     @Override
     public void start(Stage stage) {
 
-        System.out.println(numOfNonPassableCells);
-
         //Make environment with given seed
-        if(seed > 0 && seed <= 40) {
+        if(seed >= 0 || seed <= 40) {
             environment = new Environment(width, height, gridSize, numOfAgents, numOfGoals);
             SeedGenerator generator = new SeedGenerator(searchType, environment, maxStep, maxTime);
             generator.buildSeed(seed);

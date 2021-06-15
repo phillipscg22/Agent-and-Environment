@@ -33,6 +33,9 @@ public interface Constants {
     String ITERATIVE_DEEPENING_DEPTH_FIRST_SEARCH = "iterativeDeepeningDepthFirstSearch";
     String UNIFORMED_COST_SEARCH = "uniformedCostSearch";
 
+    String GREEDY_BEST_FIRST_SEARCH = "GreedyBestFirstSearch";
+    String A_STAR_BEST_FIRST_SEARCH = "AStarBestFirstSearch";
+
     default TruckAgent build(double width, double height, Location location, TruckAgent truck, int count) {
 
         //Shape of Truck

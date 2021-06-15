@@ -84,6 +84,12 @@ public class MoveAgents implements Action, Constants {
                                 goalNode = ucs.search(rootNode, maxTime);
                                 break;
                             }
+                            case GREEDY_BEST_FIRST_SEARCH: {
+                                waitTime = 500;
+                                GreedyBestFirstSearch gbfs = new GreedyBestFirstSearch(environment);
+                                goalNode = gbfs.search(rootNode, maxTime);
+                                break;
+                            }
                             default:
                                 break;
                         }

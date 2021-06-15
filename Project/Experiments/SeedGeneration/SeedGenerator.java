@@ -36,6 +36,10 @@ public class SeedGenerator extends ObstacleGeneration implements Action, Constan
 
         switch (seed) {
 
+            case 0: {
+                buildSeed0(environment);
+                break;
+            }
             case 1: {
                 buildSeed1(environment);
                 break;
@@ -227,6 +231,12 @@ public class SeedGenerator extends ObstacleGeneration implements Action, Constan
                                 waitTime = 500;
                                 UniformedCostSearch ucs = new UniformedCostSearch(environment);
                                 goalNode = ucs.search(rootNode, maxTime);
+                                break;
+                            }
+                            case GREEDY_BEST_FIRST_SEARCH: {
+                                waitTime = 500;
+                                GreedyBestFirstSearch gbfs = new GreedyBestFirstSearch(environment);
+                                goalNode = gbfs.search(rootNode, maxTime);
                                 break;
                             }
                             default:

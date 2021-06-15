@@ -17,7 +17,9 @@ public class ObstacleGeneration implements Constants {
      * 1-20 single agent
      * 21-40 multiple agents
      */
+    public void buildSeed0(Environment environment) {
 
+    }
     public void buildSeed1(Environment environment) {
 
         int gridSize = environment.getGridSize();
