@@ -157,17 +157,17 @@ public class Node implements Cloneable, Comparable<Node> {
 
     public double getFValue(int x, int y) {
 
-        Heuristics heuristics = new Heuristics();
+        Heuristics heuristics = new Heuristics(x,y);
 
-        double fValue = heuristics.getFValue(x,y,pathCost); //f(n) = g(n) + h(n)
+        double fValue = heuristics.getFValue(pathCost); //f(n) = g(n) + h(n)
 
         return fValue;
     }
 
     public double getHValue(int x, int y) {
-        Heuristics heuristics = new Heuristics();
+        Heuristics heuristics = new Heuristics(x,y);
 
-        double hValue = heuristics.getHValue(x,y);// h(n)
+        double hValue = heuristics.getHValue();// h(n)
 
 
         return hValue;
