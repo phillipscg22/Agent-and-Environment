@@ -18,6 +18,7 @@ public class Node implements Cloneable, Comparable<Node> {
     private double hValue;  // h(n) heuristic estimate
     private double fValue;  //f(n) = g(n) + h(n)
 
+
     //Root therefore no parent or action
     public Node(Cell state) {
 
@@ -79,9 +80,9 @@ public class Node implements Cloneable, Comparable<Node> {
     @Override
     public int compareTo(Node node) {
 
-        if(this.fValue == node.getFValue())
+        if(this.fValue == node.getFValue(node.getState().getLocation().getX(),node.getState().getLocation().getY()))
             return 0;
-        else if(this.fValue < node.getFValue())
+        else if(this.fValue < node.getFValue(node.getState().getLocation().getX(),node.getState().getLocation().getY()))
             return -1;
         else
             return 1;
@@ -153,12 +154,21 @@ public class Node implements Cloneable, Comparable<Node> {
         this.pathCost = pathCost;
     }
 
-    public double getFValue() {
+
+    public double getFValue(int x, int y) {
+
+        Heuristics heuristics = new Heuristics();
+
+        double fValue = heuristics.getFValue(x,y,pathCost); //f(n) = g(n) + h(n)
 
         return fValue;
     }
 
-    public double getHValue() {
+    public double getHValue(int x, int y) {
+        Heuristics heuristics = new Heuristics();
+
+        double hValue = heuristics.getHValue(x,y);// h(n)
+
 
         return hValue;
     }
@@ -196,9 +206,11 @@ public class Node implements Cloneable, Comparable<Node> {
         @Override
         public int compare(Node thisNode, Node thatNode) {
 
-            if(thisNode.getHValue() > thatNode.getHValue())
+            if(thisNode.getHValue(thisNode.getState().getLocation().getX(),thisNode.getState().getLocation().getY()) >
+                    thatNode.getHValue(thatNode.getState().getLocation().getX(),thatNode.getState().getLocation().getY()))
                 return 1;
-            else if(thisNode.getHValue() < thatNode.getHValue())
+            else if(thisNode.getHValue(thisNode.getState().getLocation().getX(),thisNode.getState().getLocation().getY()) <
+                    thatNode.getHValue(thatNode.getState().getLocation().getX(),thatNode.getState().getLocation().getY()))
                 return -1;
 
             return 0;
@@ -210,9 +222,11 @@ public class Node implements Cloneable, Comparable<Node> {
         @Override
         public int compare(Node thisNode, Node thatNode) {
 
-            if(thisNode.getFValue() > thatNode.getFValue())
+            if(thisNode.getFValue(thisNode.getState().getLocation().getX(),thisNode.getState().getLocation().getY()) >
+                    thatNode.getFValue(thatNode.getState().getLocation().getX(),thatNode.getState().getLocation().getY()))
                 return 1;
-            else if(thisNode.getFValue() < thatNode.getFValue())
+            else if(thisNode.getFValue(thisNode.getState().getLocation().getX(),thisNode.getState().getLocation().getY()) <
+                    thatNode.getFValue(thatNode.getState().getLocation().getX(),thatNode.getState().getLocation().getY()))
                 return -1;
 
             return 0;

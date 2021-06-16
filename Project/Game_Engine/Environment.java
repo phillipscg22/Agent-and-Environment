@@ -17,6 +17,7 @@ public class Environment extends GridPane implements Constants {
     private int numOfAgents;
     private int numOfNonPassable;
 
+
     public Environment(double width, double height, int gridSize, int numOfGoals, int numOfAgents, int numOfNonPassable) {
 
         this.width = width;
