@@ -19,7 +19,7 @@ public class UniformedCostSearch implements Constants {
 
     public UniformedCostSearch(Environment environment) {
 
-        fringe = new PriorityQueue<>(new Node.NodeComparator());
+        fringe = new PriorityQueue<>(new Node.NodeComparator(environment.getGoals(), UNIFORMED_COST_SEARCH));
         expandedNodes = new LinkedList<>();
 
         nodesDB = new HashMap<>();

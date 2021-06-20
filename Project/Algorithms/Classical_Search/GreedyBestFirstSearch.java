@@ -21,7 +21,7 @@ public class GreedyBestFirstSearch implements Constants {
 
     public GreedyBestFirstSearch(Environment environment) {
 
-        fringe = new PriorityQueue<>(new Node.NodeComparatorGreedy());
+        fringe = new PriorityQueue<>(new Node.NodeComparator(environment.getGoals(), GREEDY_BEST_FIRST_SEARCH));
         expandedNodes = new LinkedList<>();
 
 

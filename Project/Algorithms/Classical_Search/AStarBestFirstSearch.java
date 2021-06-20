@@ -20,7 +20,7 @@ public class AStarBestFirstSearch implements Constants {
 
     public AStarBestFirstSearch(Environment environment) {
 
-        fringe = new PriorityQueue<>(new Node.NodeComparatorAStar());
+        fringe = new PriorityQueue<>(new Node.NodeComparator(environment.getGoals(), A_STAR_BEST_FIRST_SEARCH));
         expandedNodes = new LinkedList<>();
 
         nodesDB = new HashMap<>();

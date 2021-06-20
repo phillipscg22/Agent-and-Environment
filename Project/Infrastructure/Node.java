@@ -1,5 +1,6 @@
 package Project.Infrastructure;
 
+import Project.Algorithms.Classical_Search.*;
 import Project.Game_Engine.Action;
 import Project.Game_Engine.Cell;
 import Project.Game_Engine.Environment;
@@ -31,6 +32,7 @@ public class Node implements Cloneable, Comparable<Node> {
 
     /**
      * Added recent
+     *
      * @param state
      * @param parent
      * @param action
@@ -44,10 +46,9 @@ public class Node implements Cloneable, Comparable<Node> {
 
         actionsList = new ArrayList<String>();
 
-        if(parent.getActionsList().size() == 0) {
+        if (parent.getActionsList().size() == 0) {
             actionsList.add(0, action);
-        }
-        else {
+        } else {
 
             actionsList = parent.getActionsList();
             actionsList.add(action);
@@ -62,7 +63,7 @@ public class Node implements Cloneable, Comparable<Node> {
         //now do a deep copy
         nodeClone.state = (Cell) state.clone();
 
-        if(parent != null)
+        if (parent != null)
             nodeClone.parent = (Node) parent.clone();
 
         nodeClone.actionsList = (ArrayList<String>) actionsList.clone();
@@ -70,7 +71,7 @@ public class Node implements Cloneable, Comparable<Node> {
         return nodeClone;
     }
 
-    public Node copyOfNode() throws CloneNotSupportedException{
+    public Node copyOfNode() throws CloneNotSupportedException {
 
         return (Node) this.clone();
     }
@@ -80,9 +81,9 @@ public class Node implements Cloneable, Comparable<Node> {
     @Override
     public int compareTo(Node node) {
 
-        if(this.fValue == node.getFValue(node.getState().getLocation().getX(),node.getState().getLocation().getY()))
+        if (this.fValue == node.getFValue())
             return 0;
-        else if(this.fValue < node.getFValue(node.getState().getLocation().getX(),node.getState().getLocation().getY()))
+        else if (this.fValue < node.getFValue())
             return -1;
         else
             return 1;
@@ -96,19 +97,19 @@ public class Node implements Cloneable, Comparable<Node> {
 
         if (o == null) return false;  //case of parent.parent being the root/initial state
 
-        if ( this == o ) return true; //check for self-comparison
+        if (this == o) return true; //check for self-comparison
 
-        if ( !(o instanceof Node) ) return false;
+        if (!(o instanceof Node)) return false;
 
-        Node in = (Node)o;
+        Node in = (Node) o;
 
         //compare the data members
-        if(this.state == null)
+        if (this.state == null)
             System.out.println("this");
-        if(in.state == null)
+        if (in.state == null)
             System.out.println("in");
 
-        if(this.state.equals(in.state) && this.pathCost == in.pathCost && this.hValue == in.hValue && this.action.equals(in.action))
+        if (this.state.equals(in.state) && this.pathCost == in.pathCost && this.hValue == in.hValue && this.action.equals(in.action))
             return true;
 
         return false;
@@ -154,24 +155,11 @@ public class Node implements Cloneable, Comparable<Node> {
         this.pathCost = pathCost;
     }
 
-
-    public double getFValue(int x, int y) {
-
-        Heuristics heuristics = new Heuristics(x,y);
-
-        double fValue = heuristics.getFValue(pathCost); //f(n) = g(n) + h(n)
+    public double getFValue() {
 
         return fValue;
     }
 
-    public double getHValue(int x, int y) {
-        Heuristics heuristics = new Heuristics(x,y);
-
-        double hValue = heuristics.getHValue();// h(n)
-
-
-        return hValue;
-    }
 
     public ArrayList<String> getActionsList() {
 
@@ -187,49 +175,57 @@ public class Node implements Cloneable, Comparable<Node> {
                 state.toString();
     }
 
+
     public static class NodeComparator implements Comparator<Node> {
 
+        private Cell[] goals;
+        private String searchType;
+
+        public NodeComparator(Cell[] goals, String searchType) {
+            this.goals = goals;
+            this.searchType = searchType;
+        }
+
         @Override
         public int compare(Node thisNode, Node thatNode) {
 
-            if(thisNode.getPathCost() > thatNode.getPathCost())
-                return 1;
-            else if(thisNode.getPathCost() < thatNode.getPathCost())
-                return -1;
+            Heuristics heuristics = new Heuristics();
+
+
+            switch (searchType) {
+
+                case "UniformedCostSearch": {
+
+                    if (thisNode.getPathCost() > thatNode.getPathCost())
+                        return 1;
+                    else if (thisNode.getPathCost() < thatNode.getPathCost())
+                        return -1;
+                }
+                case "GreedyBestFirstSearch": {
+                    if (heuristics.getHValue(thisNode.getState().getLocation().getX(), thisNode.getState().getLocation().getY(), goals[0])
+                            > heuristics.getHValue(thatNode.getState().getLocation().getX(), thatNode.getState().getLocation().getY(), goals[0]))
+                        return 1;
+                    else if (heuristics.getHValue(thisNode.getState().getLocation().getX(), thisNode.getState().getLocation().getY(), goals[0])
+                            < heuristics.getHValue(thatNode.getState().getLocation().getX(), thatNode.getState().getLocation().getY(), goals[0]))
+                        return -1;
+                }
+                case "AStarBestFirstSearch": {
+
+                    if (heuristics.getFValue(thisNode.getState().getLocation().getX(), thisNode.getState().getLocation().getY(), goals[0], thisNode.pathCost)
+                            > heuristics.getFValue(thatNode.getState().getLocation().getX(), thatNode.getState().getLocation().getY(), goals[0], thatNode.pathCost))
+                        return 1;
+                    else if (heuristics.getFValue(thisNode.getState().getLocation().getX(), thisNode.getState().getLocation().getY(), goals[0], thisNode.pathCost)
+                            < heuristics.getFValue(thatNode.getState().getLocation().getX(), thatNode.getState().getLocation().getY(), goals[0], thatNode.pathCost))
+                        return -1;
+
+                }
+                default:
+                    break;
+            }
+
 
             return 0;
         }
     }
 
-    public static class NodeComparatorGreedy implements Comparator<Node> {
-
-        @Override
-        public int compare(Node thisNode, Node thatNode) {
-
-            if(thisNode.getHValue(thisNode.getState().getLocation().getX(),thisNode.getState().getLocation().getY()) >
-                    thatNode.getHValue(thatNode.getState().getLocation().getX(),thatNode.getState().getLocation().getY()))
-                return 1;
-            else if(thisNode.getHValue(thisNode.getState().getLocation().getX(),thisNode.getState().getLocation().getY()) <
-                    thatNode.getHValue(thatNode.getState().getLocation().getX(),thatNode.getState().getLocation().getY()))
-                return -1;
-
-            return 0;
-        }
-    }
-
-    public static class NodeComparatorAStar implements Comparator<Node> {
-
-        @Override
-        public int compare(Node thisNode, Node thatNode) {
-
-            if(thisNode.getFValue(thisNode.getState().getLocation().getX(),thisNode.getState().getLocation().getY()) >
-                    thatNode.getFValue(thatNode.getState().getLocation().getX(),thatNode.getState().getLocation().getY()))
-                return 1;
-            else if(thisNode.getFValue(thisNode.getState().getLocation().getX(),thisNode.getState().getLocation().getY()) <
-                    thatNode.getFValue(thatNode.getState().getLocation().getX(),thatNode.getState().getLocation().getY()))
-                return -1;
-
-            return 0;
-        }
-    }
 }

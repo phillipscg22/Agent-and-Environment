@@ -31,7 +31,7 @@ public interface Constants {
     String DEPTH_FIRST_SEARCH = "depthFirstSearch";
     String DEPTH_LIMITED_SEARCH = "depthLimitedSearch";
     String ITERATIVE_DEEPENING_DEPTH_FIRST_SEARCH = "iterativeDeepeningDepthFirstSearch";
-    String UNIFORMED_COST_SEARCH = "uniformedCostSearch";
+    String UNIFORMED_COST_SEARCH = "UniformedCostSearch";
 
     String GREEDY_BEST_FIRST_SEARCH = "GreedyBestFirstSearch";
     String A_STAR_BEST_FIRST_SEARCH = "AStarBestFirstSearch";
