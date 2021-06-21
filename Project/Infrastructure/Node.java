@@ -176,7 +176,7 @@ public class Node implements Cloneable, Comparable<Node> {
     }
 
 
-    public static class NodeComparator implements Comparator<Node> {
+    public static class NodeComparator <AnyType> implements Comparator<Node> {
 
         private Cell[] goals;
         private String searchType;
@@ -191,38 +191,43 @@ public class Node implements Cloneable, Comparable<Node> {
 
             Heuristics heuristics = new Heuristics();
 
-
             switch (searchType) {
 
                 case "UniformedCostSearch": {
 
-                    if (thisNode.getPathCost() > thatNode.getPathCost())
-                        return 1;
-                    else if (thisNode.getPathCost() < thatNode.getPathCost())
-                        return -1;
+                        return contrast(thisNode.getPathCost(),thatNode.getPathCost());
                 }
                 case "GreedyBestFirstSearch": {
-                    if (heuristics.getHValue(thisNode.getState().getLocation().getX(), thisNode.getState().getLocation().getY(), goals[0])
-                            > heuristics.getHValue(thatNode.getState().getLocation().getX(), thatNode.getState().getLocation().getY(), goals[0]))
-                        return 1;
-                    else if (heuristics.getHValue(thisNode.getState().getLocation().getX(), thisNode.getState().getLocation().getY(), goals[0])
-                            < heuristics.getHValue(thatNode.getState().getLocation().getX(), thatNode.getState().getLocation().getY(), goals[0]))
-                        return -1;
+
+                    double thisNodeHValue = heuristics.getHValue(thisNode.getState().getLocation().getX(),
+                                            thisNode.getState().getLocation().getY(), goals[0]);
+                    double thatNodeHValue = heuristics.getHValue(thatNode.getState().getLocation().getX(),
+                                            thatNode.getState().getLocation().getY(), goals[0]);
+
+                        return contrast(thisNodeHValue, thatNodeHValue);
                 }
                 case "AStarBestFirstSearch": {
 
-                    if (heuristics.getFValue(thisNode.getState().getLocation().getX(), thisNode.getState().getLocation().getY(), goals[0], thisNode.pathCost)
-                            > heuristics.getFValue(thatNode.getState().getLocation().getX(), thatNode.getState().getLocation().getY(), goals[0], thatNode.pathCost))
-                        return 1;
-                    else if (heuristics.getFValue(thisNode.getState().getLocation().getX(), thisNode.getState().getLocation().getY(), goals[0], thisNode.pathCost)
-                            < heuristics.getFValue(thatNode.getState().getLocation().getX(), thatNode.getState().getLocation().getY(), goals[0], thatNode.pathCost))
-                        return -1;
+                    double thisNodeFValue = heuristics.getFValue(thisNode.getState().getLocation().getX(),
+                                            thisNode.getState().getLocation().getY(), goals[0], thisNode.pathCost);
+                    double thatNodeFValue = heuristics.getFValue(thatNode.getState().getLocation().getX(),
+                                            thatNode.getState().getLocation().getY(), goals[0], thatNode.pathCost);
+
+                    return contrast(thisNodeFValue, thatNodeFValue);
 
                 }
                 default:
                     break;
             }
 
+            return 0;
+        }
+        public  <AnyType extends Comparable<AnyType>> int contrast(AnyType thisNodeValue, AnyType thatNodeValue){
+
+            if (thisNodeValue.compareTo(thatNodeValue) > 0)
+                return 1;
+            else if (thisNodeValue.compareTo(thatNodeValue) < 0)
+                return -1;
 
             return 0;
         }

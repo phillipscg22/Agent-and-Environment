@@ -19,7 +19,7 @@ public class TestEnvironment extends Application implements Constants {
 
     protected boolean deterministic = true;
 
-    protected int gridSize = 5;
+    protected int gridSize = 15;
 
     protected int numOfGoals = 1;
     protected int numOfAgents = 1;
@@ -27,7 +27,7 @@ public class TestEnvironment extends Application implements Constants {
 
     protected String searchType = A_STAR_BEST_FIRST_SEARCH;
 
-    private int seed = 13;
+    private int seed = 14;
 
     @Override
     public void start(Stage stage) {
