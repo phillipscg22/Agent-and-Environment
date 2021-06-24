@@ -90,6 +90,12 @@ public class MoveAgents implements Action, Constants {
                                 goalNode = gbfs.search(rootNode, maxTime);
                                 break;
                             }
+                            case A_STAR_SEARCH: {
+                                waitTime = 500;
+                                AStarSearch ass = new AStarSearch(environment);
+                                goalNode = ass.search(rootNode, maxTime);
+                                break;
+                            }
                             default:
                                 break;
                         }

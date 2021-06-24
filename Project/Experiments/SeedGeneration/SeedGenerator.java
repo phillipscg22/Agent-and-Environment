@@ -239,10 +239,10 @@ public class SeedGenerator extends ObstacleGeneration implements Action, Constan
                                 goalNode = gbfs.search(rootNode, maxTime);
                                 break;
                             }
-                            case A_STAR_BEST_FIRST_SEARCH: {
+                            case A_STAR_SEARCH: {
                                 waitTime = 500;
-                                AStarBestFirstSearch abfs = new AStarBestFirstSearch(environment);
-                                goalNode = abfs.search(rootNode, maxTime);
+                                AStarSearch ass = new AStarSearch(environment);
+                                goalNode = ass.search(rootNode, maxTime);
                                 break;
                             }
                             default:

@@ -25,7 +25,7 @@ public class TestEnvironment extends Application implements Constants {
     protected int numOfAgents = 1;
     protected int numOfNonPassableCells = gridSize * gridSize / 5;
 
-    protected String searchType = A_STAR_BEST_FIRST_SEARCH;
+    protected String searchType = A_STAR_SEARCH;
 
     private int seed = 14;
 

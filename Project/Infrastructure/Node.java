@@ -206,7 +206,7 @@ public class Node implements Cloneable, Comparable<Node> {
 
                         return contrast(thisNodeHValue, thatNodeHValue);
                 }
-                case "AStarBestFirstSearch": {
+                case "AStarSearch": {
 
                     double thisNodeFValue = heuristics.getFValue(thisNode.getState().getLocation().getX(),
                                             thisNode.getState().getLocation().getY(), goals[0], thisNode.pathCost);
@@ -222,11 +222,11 @@ public class Node implements Cloneable, Comparable<Node> {
 
             return 0;
         }
-        public  <AnyType extends Comparable<AnyType>> int contrast(AnyType thisNodeValue, AnyType thatNodeValue){
+        public int contrast(double thisNodeValue, double thatNodeValue){
 
-            if (thisNodeValue.compareTo(thatNodeValue) > 0)
+            if (thisNodeValue > thatNodeValue)
                 return 1;
-            else if (thisNodeValue.compareTo(thatNodeValue) < 0)
+            else if (thisNodeValue < thatNodeValue)
                 return -1;
 
             return 0;

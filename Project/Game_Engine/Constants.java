@@ -34,7 +34,7 @@ public interface Constants {
     String UNIFORMED_COST_SEARCH = "UniformedCostSearch";
 
     String GREEDY_BEST_FIRST_SEARCH = "GreedyBestFirstSearch";
-    String A_STAR_BEST_FIRST_SEARCH = "AStarBestFirstSearch";
+    String A_STAR_SEARCH = "AStarSearch";
 
     default TruckAgent build(double width, double height, Location location, TruckAgent truck, int count) {
 

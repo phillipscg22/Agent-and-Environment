@@ -10,7 +10,7 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.PriorityQueue;
 
-public class AStarBestFirstSearch implements Constants {
+public class AStarSearch implements Constants {
 
     private Node rootNode;
     private HashMap<String, Node> nodesDB;
@@ -18,9 +18,9 @@ public class AStarBestFirstSearch implements Constants {
     private LinkedList<Node> expandedNodes;
     private Environment environment;
 
-    public AStarBestFirstSearch(Environment environment) {
+    public AStarSearch(Environment environment) {
 
-        fringe = new PriorityQueue<>(new Node.NodeComparator(environment.getGoals(), A_STAR_BEST_FIRST_SEARCH));
+        fringe = new PriorityQueue<>(new Node.NodeComparator(environment.getGoals(), A_STAR_SEARCH));
         expandedNodes = new LinkedList<>();
 
         nodesDB = new HashMap<>();
